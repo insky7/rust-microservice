@@ -1,0 +1,44 @@
+[workspace]
+# Not 100% sure on what this does, but rust analyzer gives a warning if this isn't set to 2.
+resolver = "2"
+# The "members" or directories/crates we are including in this workspace.
+# These names will come from all new library/create additions to the crates/ directory. 
+members = [
+    "backend",
+]
+
+[workspace.package]
+# The Rust edition our crates will be using. This value can be '2015', '2018', or '2021' as of 4-28-24.
+# A new value is added every 3 years and is done so future crates have backwards compatibility. 
+edition = "2021"
+# The Rust version we want to use.
+# This will be updated frequently because ideally we want to be using the latest (stable) features and updates that are released.
+rust-version = "1.77.2"
+
+[workspace.dependencies]
+# Generic Error type we can build off of with other crates and customize; see https://crates.io/crates/anyhow.
+anyhow = "1.0.82"
+# Web server library similar to: (Python's Flask), (Go's Gin), (JavaScript's Express), etc...; see https://crates.io/crates/axum.
+axum = "0.7.5"
+# CLI argument parser library; see https://crates.io/crates/clap.
+clap = { version = "4.5.4", features = ["derive", "env"] }
+# Environment variable library; see https://crates.io/crates/dotenvy.
+dotenvy = "0.15.7"
+# Async runtime library; see https://crates.io/crates/tokio.
+tokio = { version = "1.37.0", features = ["full"] }
+# Log and event-based tracking library (logging); see https://crates.io/crates/tracing.
+tracing = "0.1.40"
+# Utilities for the `tracing` library: see https://crates.io/crates/tracing-subscriber.
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+
+[workspace.lints.rust]
+# Denies running any crate(s) with unsafe code; helps with safety.
+unsafe_code = "deny"
+# Denies running any crate(s) that contain dependencies that are not being used; helps with build times and organization. 
+unused_crate_dependencies = "deny"
+# Deny everything actually
+unused = "deny"
+
+[workspace.lints.clippy]
+# Denies running any crate(s) that contain obvious non-performant code; slightly helps with performance. 
+perf = "deny"

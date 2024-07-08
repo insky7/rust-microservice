@@ -1,0 +1,19 @@
+[package]
+name = "backend"                # Name of the binary/package (crate)
+version = "0.1.0"               # Current version of the binary; once we have more services, we will start incrementing this
+edition.workspace = true        # Rust edition for this binary; we'll be using the same edition across all binaries so we're storing this value at the workspace level
+publish = false                 # This is not necessary, but ensures that this package doesn't accidentally get published to crates.io
+rust-version.workspace = true   # Rust version for this crate to use, which pulls from the workspace because we want all crates to use the same/latest version
+
+[dependencies] # See workspace definitions for more info.
+anyhow.workspace = true
+axum.workspace = true
+clap.workspace = true
+dotenvy.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Use workspace's linting definitions
+[lints]
+workspace = true
